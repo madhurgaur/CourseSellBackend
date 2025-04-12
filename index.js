@@ -7,6 +7,7 @@ import userRoute from "./routes/user.route.js";
 import courseRoute from "./routes/course.route.js";
 import mediaRoute from "./routes/media.route.js";
 import purchaseRoute from "./routes/purchaseCourse.route.js";
+import helmet from "helmet";
 import courseProgressRoute from "./routes/courseProgress.route.js";
 
 dotenv.config({});
@@ -34,7 +35,13 @@ const corsOptions = {
   app.options("*", cors(corsOptions)); 
   
 
+app.use(helmet());
+
 // API routes
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
+
 app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
